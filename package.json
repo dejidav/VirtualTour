@@ -4,9 +4,7 @@
   "description": "An easy to build  360 degree tour cms ",
   "main": "index.js",
   "scripts": {
-    "test": "Jest",
-    "start": "nodemon --exec babel-node server.js --ignore public/",
-    "dev": "webpack -wd"
+    "test": "Jest"
   },
   "repository": {
     "type": "git",
