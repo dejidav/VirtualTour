@@ -1,6 +1,6 @@
 import Photo from '../models/Photo'
 
-export const PhotoController = {
+ const PhotoController = {
     async index(req, res){
         const photos = await Photo.find().populate('content');
         res.send(photos);
@@ -9,7 +9,7 @@ export const PhotoController = {
         
     },
     async show(req, res){
-        const photo = await Photo.findById(req.params.id);
+        const photo = await Photo.findById({_id: req.params.photoId}).catch(console.error);
         res.send(photo);
     },
     async update(req, res){
@@ -19,3 +19,5 @@ export const PhotoController = {
   
     }
 }
+
+module.exports = PhotoController

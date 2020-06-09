@@ -15,8 +15,17 @@ const photoModel = mongoose.Schema({
         type: String
     },
     tooltips: [
-        { type: mongoose.Schema.Types.ObjectId, ref: 'tooltip' }
-    ]
+        [
+            { type: mongoose.Schema.Types.ObjectId, ref: 'Tooltip' }
+            
+        ], 
+        [
+            { type: mongoose.Schema.Types.ObjectId, ref: 'Link' }
+        ]
+    ],
+    content_id: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'content'
+    }
 },
     {
         timestamps: true    

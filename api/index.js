@@ -3,7 +3,7 @@ import config from "../config";
 
 
 mongoose.Promise = require('bluebird');
-mongoose.connect(config.mongodbUri, { useMongoClient: true, });
+mongoose.connect(config.mongodbUri);
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function () {  

@@ -32,6 +32,8 @@ server.get(["/", "/contests/:contestId"], (req, res) => {
     });
 });
 
+import './api/seeder'
+
 server.use("/api", router); // renders api requests
 server.use(express.static("public")); //renders public files
 

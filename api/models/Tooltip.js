@@ -3,14 +3,11 @@ import mongoose from 'mongoose'
 const tooltipModel = mongoose.Schema({
     type: {
         type: String,
-        required: '{PATH} is required!'
+        required: true
     },
 
     rotationY: {
         type: Number 
-    },
-    linkedPhotoId: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Photo'
     },
 
     width: {
@@ -21,12 +18,24 @@ const tooltipModel = mongoose.Schema({
         type: Number
     },
 
-    source: {type: String },
-    attribution: {type: String}
+    source: {
+        type: String
+     },
+
+    text: {
+        type: String 
+    },
+
+    attribution: {
+        type: String
+    },
+    photo_id:{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Photo'
+    }
 
 },
 {
     timestamps: true    
 })
 
-module.exports = mongoose.model('tooltip', tooltipModel);
+module.exports = mongoose.model('Tooltip', tooltipModel);

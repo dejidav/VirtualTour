@@ -1,17 +1,16 @@
 //contains routes 
 import express from 'express'
-//import {ContentController, PhotoController, SoundEffectsController, TooltipController } from './controllers'
+import {index } from './controllers/ContentController.js'
+import {show} from './controllers/PhotoController'
+import soundEffectsController from './controllers/SoundEffectsController'
+import Content from './models/Content'
+import './index'
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    res.send("200 Content")
-});
+router.get("/", index);
 
-router.get("/photo/:photoId", (req, res) => {
-    let id = req.params.photoId
-    res.send("200 Photo with " + id )
-});
+router.get("/photo/:photoId", show);
 
 router.get("/soundEffects", (req, res) => {
     res.send("200 SOund Effects")

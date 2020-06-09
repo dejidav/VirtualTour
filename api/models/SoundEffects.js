@@ -48,6 +48,10 @@ const soundEffectsModel = mongoose.Schema({
         volume: {
             type: Number
         } 
+    },
+
+    content_id: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'content'
     }
 },{
     timestamp: true
