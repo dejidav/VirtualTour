@@ -4,7 +4,11 @@
   "description": "An easy to build  360 degree tour cms ",
   "main": "index.js",
   "scripts": {
-    "test": "Jest"
+    "test": "Jest",
+    "start": "babel-node server.js",
+    "dev": "webpack -wd",
+    "loadtestdata": "babel-node loadTestData.js",
+    "updateData": "babel-node updateTestData.js"
   },
   "repository": {
     "type": "git",
@@ -17,17 +21,23 @@
   },
   "homepage": "https://github.com/dejidav/VirtualTour#readme",
   "dependencies": {
+    "@types/bluebird": "^3.5.32",
+    "@types/mongoose": "^5.7.23",
+    "axios": "^0.19.2",
+    "bluebird": "^3.5.5",
     "ejs": "^3.1.3",
     "express": "^4.17.1",
     "json-loader": "^0.5.7",
     "mongodb": "^3.5.7",
+    "mongoose": "^5.9.18",
+    "node-sass-middleware": "^0.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@babel/node": "latest",
     "@babel/core": "^7.9.6",
+    "@babel/node": "latest",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
@@ -36,6 +46,7 @@
     "eslint": "^7.0.0",
     "eslint-plugin-react": "^7.20.0",
     "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   }
