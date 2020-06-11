@@ -57,4 +57,9 @@ const soundEffectsModel = mongoose.Schema({
     timestamp: true
 })
 
-module.exports = mongoose.model('soundEffects', soundEffectsModel)
+
+try{
+    module.exports = mongoose.model('soundEffects')
+}catch (error){
+    module.exports = mongoose.model('soundEffects', soundEffectsModel)
+}

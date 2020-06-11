@@ -4,7 +4,7 @@ import  Tooltip from './models/Tooltip'
 import Photo from './models/Photo'
 import Content from './models/Content'
 import Link from './models/Link'
-import SoundEffect from './models/SoundEffects'
+import soundEffects from './models/SoundEffects'
 
 
 //seed tooltips 
@@ -28,7 +28,7 @@ async function seedTooltips(){
     ]
     tooltips.forEach( function(tool) {
         var newTooltip =  new Tooltip(tool)
-        newTooltip.update()
+        newTooltip.save()
     })
 
     const a = await Tooltip.find()
@@ -62,10 +62,56 @@ async function seedLinks(){
 // seed photo, save and find 
 async function seedPhotos() {
     console.log("Seeding photos to " + mongoose.connection.name + '...')
-    const tooltip = await Tooltip.findOne({type: "panelimage"}); // returns array
+    //const tooltip = await Tooltip.findOne({type: "panelimage"}); // returns array
     const content = await Content.findOne({nav_icon: "gannon_icon.png"})
     const link = await Link.findOne({ text: "Middle View"})
     
+    const photos = [
+        {
+        name: "11111",
+        rotationOffset: 200,
+        uri: "NashLibrary-firstfloor1.jpg",
+        Tooltips: [[], [link._id]], // takes in array 
+        content_id: content._id
+    },
+
+    {
+        name: "2222222",
+        rotationOffset: 200,
+        uri: "NashLibrary-firstfloor2.jpg",
+        Tooltips: [],
+        content_id: content._id
+    },
+
+    {
+        name: "333333",
+        rotationOffset: 200,
+        uri: "NashLibrary-firstfloor3.jpg",
+        Tooltips: [[], [link._id]],
+        content_id: content._id
+    }
+]
+
+photos.forEach(function(photo){
+    var newPhoto = new Photo(photo);
+    newPhoto.save();
+})
+
+const b = await Photo.find();
+console.log('photos: ' + b);
+
+
+}
+
+
+
+async function updatephotos(){
+
+    console.log("updating photos to " + mongoose.connection.name + '...')
+    const tooltip = await Tooltip.findOne({type: "panelimage"}); // returns array
+    const content = await Content.findOne({nav_icon: "gannon_icon.png"})
+    const link = await Link.findOne({ text: "Middle View"})
+
     const photos = [
         {
         name: "11111",
@@ -94,13 +140,11 @@ async function seedPhotos() {
 
 photos.forEach(function(photo){
     var newPhoto = new Photo(photo);
-    newPhoto.save();
+    newPhoto.update();
 })
 
 const b = await Photo.find();
 console.log('photos: ' + b);
-
-
 }
 
 
@@ -138,10 +182,10 @@ async function seedSoundEffects() {
 
     }
 
-    var setting = new SoundEffect(newSetting);
+    var setting = new soundEffects(newSetting);
     await setting.save();
 
-    const c = await SoundEffect.find();
+    const c = await soundEffects.find();
     console.log('SoundEffects: ' + c);
 
 
@@ -155,18 +199,20 @@ async function seedContent() {
     console.log("Seeding Content to " + mongoose.connection.name + '...');
     let firstPhoto = await Photo.findOne({name: "11111"});
     let photos = await Photo.findOne({name: "11111"});
-    let soundEffects = SoundEffect.findOne({uri: "switch-flip.wav"})
+    let soundEffect = soundEffects.findOne({uri: "switch-flip.wav"})
 
     const content = {
         nav_icon: "gannon_icon.png",
-        firstPhotoId: firstPhoto._id,
-        soundEffects: soundEffects._id,
-        photos: [photos._id]
+        firstPhotoId:"5ee245aec16af850217a2d51",
+        //soundEffects: soundEffect._id,
+        photos: ["5ee245aec16af850217a2d4f", "5ee245aec16af850217a2d51", "5ee245aec16af850217a2d50"]
 
     }
 
-    var contents = new Content(content)
-    await contents.save()
+    var contents =  await Content.findOne({_id: "5ee2448baf63844ff43015f4"})
+    contents.firstPhotoId = "5ee245aec16af850217a2d51"
+    contents.photos =  ["5ee245aec16af850217a2d4f", "5ee245aec16af850217a2d51", "5ee245aec16af850217a2d50"]
+    await contents.updateOne()
     const d = await Content.find();
     console.log('Content: ' + d);
 
@@ -174,7 +220,6 @@ async function seedContent() {
 
 //execute functions
 
-seedSoundEffects()
-seedContent()
+
 
 
